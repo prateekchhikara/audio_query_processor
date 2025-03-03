@@ -248,7 +248,8 @@ def generate_response(query, columns_with_description_str, required_columns, pro
     response = client.chat.completions.create(
         model=MODEL_NAME,
         messages=[{"role": "user", "content": rendered_prompt}],
-        response_format={"type": "json_object"}
+        response_format={"type": "json_object"},
+        temperature=0.0
     )
     
     # Return the parsed JSON response

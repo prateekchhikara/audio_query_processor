@@ -58,7 +58,7 @@ You can test the query processing pipeline using the evaluation script:
 python evals.py
 ```
 
-This script evaluates the system on 3 predefined test queries with ground truth filters. The evaluation results are logged to Weights & Biases, allowing you to track the accuracy of the query generation process and identify potential areas for improvement.
+This script evaluates the system on 10 predefined test queries with ground truth filters. The evaluation results are logged to Weights & Biases, allowing you to track the accuracy of the query generation process and identify potential areas for improvement.
 
 ## Project Structure
 

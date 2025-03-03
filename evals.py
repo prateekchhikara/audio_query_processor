@@ -34,7 +34,14 @@ def get_fields_description():
 user_queries = [
     "models which has latency less than 100ms",
     "models which has accuracy greater than 90%",
-    "models which has F1 score greater than 0.95"
+    "models which has F1 score greater than 0.95",
+    "models with precision above 0.85 and recall greater than 0.8",
+    "models trained for more than 3 epochs with learning rate less than 0.001",
+    "models where the model name contains 'gpt'",
+    "models with generation time less than 200ms and accuracy above 0.85",
+    "models with total tokens mean less than 500",
+    "models where the warmup ratio is greater than 0.1",
+    "models with true hallucination fraction less than 0.3"
 ]
 
 # Ground truth filters for each test query
@@ -58,9 +65,103 @@ gt_filters = [
     {
         "$expr": {
             "$gt": [
-                {"$convert": {"input": {"$getField": "output.HalluScorerEvaluator.scorer_evaluation_metrics.F1"}, "to": "double"}},
+                {"$convert": {"input": {"$getField": "output.HalluScorerEvaluator.scorer_evaluation_metrics.f1"}, "to": "double"}},
                 {"$literal": 0.95}
             ]
+        }
+    },
+    {
+        "$expr": {
+            "$and": [
+                {
+                    "$gt": [
+                        {"$convert": {"input": {"$getField": "output.HalluScorerEvaluator.scorer_evaluation_metrics.precision"}, "to": "double"}},
+                        {"$literal": 0.85}
+                    ]
+                },
+                {
+                    "$gt": [
+                        {"$convert": {"input": {"$getField": "output.HalluScorerEvaluator.scorer_evaluation_metrics.recall"}, "to": "double"}},
+                        {"$literal": 0.8}
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "$expr": {
+            "$and": [
+                {
+                    "$gt": [
+                        {"$convert": {"input": {"$getField": "attributes.num_train_epochs"}, "to": "double"}},
+                        {"$literal": 3}
+                    ]
+                },
+                {
+                    "$not": [{
+                        "$gte": [
+                            {"$convert": {"input": {"$getField": "attributes.learning_rate"}, "to": "double"}},
+                            {"$literal": 0.001}
+                        ]
+                    }]
+                }
+            ]
+        }
+    },
+    {
+        "$expr": {
+            "$contains": {
+                "input": {"$getField": "attributes.model_name"},
+                "substr": {"$literal": "gpt"}
+            }
+        }
+    },
+    {
+        "$expr": {
+            "$and": [
+                {
+                    "$not": [{
+                        "$gte": [
+                            {"$convert": {"input": {"$getField": "output.model_output.generation_time.mean"}, "to": "double"}},
+                            {"$literal": 200}
+                        ]
+                    }]
+                },
+                {
+                    "$gt": [
+                        {"$convert": {"input": {"$getField": "output.HalluScorerEvaluator.scorer_evaluation_metrics.accuracy"}, "to": "double"}},
+                        {"$literal": 0.85}
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "$expr": {
+            "$not": [{
+                "$gte": [
+                    {"$convert": {"input": {"$getField": "output.model_output.total_tokens.mean"}, "to": "double"}},
+                    {"$literal": 500}
+                ]
+            }]
+        }
+    },
+    {
+        "$expr": {
+            "$gt": [
+                {"$convert": {"input": {"$getField": "attributes.warmup_ratio"}, "to": "double"}},
+                {"$literal": 0.1}
+            ]
+        }
+    },
+    {
+        "$expr": {
+            "$not": [{
+                "$gte": [
+                    {"$convert": {"input": {"$getField": "output.HalluScorerEvaluator.is_hallucination.true_fraction"}, "to": "double"}},
+                    {"$literal": 0.3}
+                ]
+            }]
         }
     }
 ]
@@ -69,7 +170,14 @@ gt_filters = [
 eval_dataset = [
     {'id': '0', 'user_query': user_queries[0], 'gt_filters': gt_filters[0]},
     {'id': '1', 'user_query': user_queries[1], 'gt_filters': gt_filters[1]},
-    {'id': '2', 'user_query': user_queries[2], 'gt_filters': gt_filters[2]}
+    {'id': '2', 'user_query': user_queries[2], 'gt_filters': gt_filters[2]},
+    {'id': '3', 'user_query': user_queries[3], 'gt_filters': gt_filters[3]},
+    {'id': '4', 'user_query': user_queries[4], 'gt_filters': gt_filters[4]},
+    {'id': '5', 'user_query': user_queries[5], 'gt_filters': gt_filters[5]},
+    {'id': '6', 'user_query': user_queries[6], 'gt_filters': gt_filters[6]},
+    {'id': '7', 'user_query': user_queries[7], 'gt_filters': gt_filters[7]},
+    {'id': '8', 'user_query': user_queries[8], 'gt_filters': gt_filters[8]},
+    {'id': '9', 'user_query': user_queries[9], 'gt_filters': gt_filters[9]}
 ]
 
 class QueryEvalModel(Model):
