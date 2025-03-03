@@ -39,16 +39,16 @@ pip install -r requirements.txt
    ```
 
 2. **Speak your query using the recording controls**:
-   ![Audio Query Processor Interface](images/image1.png)
+   <img src="images/image1.png" alt="Audio Query Processor Interface" style="border: 1px solid #ddd;"/>
 
 3. **Review your transcribed text and the generated database query**:
-   ![Audio Query Processor Interface](images/image2.png)
+   <img src="images/image2.png" alt="Audio Query Processor Interface" style="border: 1px solid #ddd;"/>
 
 4. **Explore the retrieved data results and visualizations**:
-   ![Audio Query Processor Interface](images/image3.png)
+   <img src="images/image3.png" alt="Audio Query Processor Interface" style="border: 1px solid #ddd;"/>
 
 5. **Track performance metrics and evaluation results in Weights & Biases**:
-   <img src="images/image4.png" alt="Audio Query Processor Interface" width="50%"/>
+   <img src="images/image4.png" alt="Audio Query Processor Interface" width="50%" style="border: 1px solid #ddd;"/>
 
 ## Testing the Pipeline
 
