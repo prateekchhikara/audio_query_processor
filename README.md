@@ -33,15 +33,22 @@ pip install -r requirements.txt
 
 ## Usage
 
-1. Start the Streamlit application:
-```bash
-streamlit run main.py
-```
+1. **Start the Streamlit application**:
+   ```bash
+   streamlit run main.py
+   ```
 
-2. Use the recording controls to capture your voice query
-3. Review the transcribed text and generated query
-4. Examine the data results returned from the database
-5. Monitor LLM performance metrics and evaluations on Weights & Biases dashboard
+2. **Speak your query using the recording controls**:
+   ![Audio Query Processor Interface](images/image1.png)
+
+3. **Review your transcribed text and the generated database query**:
+   ![Audio Query Processor Interface](images/image2.png)
+
+4. **Explore the retrieved data results and visualizations**:
+   ![Audio Query Processor Interface](images/image3.png)
+
+5. **Track performance metrics and evaluation results in Weights & Biases**:
+   <img src="images/image4.png" alt="Audio Query Processor Interface" width="50%"/>
 
 ## Project Structure
 
