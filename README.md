@@ -68,10 +68,21 @@ audio_query_processor/
 ├── utils.py             # Utility functions for audio processing and API calls
 ├── prompts.py           # Prompt templates for language model interactions
 ├── evals.py             # Evaluation scripts for query accuracy
+├── config.py            # Configuration settings for the application
 ├── columns.json         # Database column descriptions
 ├── requirements.txt     # Project dependencies
 └── README.md            # Project documentation
 ```
+
+## Configuration
+
+The `config.py` file contains important configuration settings for the application:
+
+- `MODEL_NAME`: The name of the OpenAI model used for processing queries (default: "gpt-4o")
+- `DATASET_DB`: The source of the database deployed on Weights & Biases
+- `PROJECT_NAME`: The name of the project in Weights & Biases (can be modified by the user)
+
+You can modify these settings to customize the application according to your needs.
 
 ## Technologies Used
 

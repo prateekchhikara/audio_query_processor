@@ -16,7 +16,7 @@ import os
 from dotenv import load_dotenv
 from utils import audio2text, start_recording, stop_recording, generate_response, get_fields_description, call_weave
 from prompts import COLUMN_SELECTION_PROMPT, QUERY_PROMPT, SORT_BY_PROMPT
-
+from config import PROJECT_NAME
 # Load environment variables
 load_dotenv()
 
@@ -29,7 +29,7 @@ def main():
     generates database queries, and displays the results.
     """
     # Initialize weave with project name
-    weave.init("audio_query_data")
+    weave.init(PROJECT_NAME)
 
     # Set page configuration and styling
     st.set_page_config(

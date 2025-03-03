@@ -22,6 +22,7 @@ import os
 from dotenv import load_dotenv
 from jinja2 import Template
 from prompts import COLUMN_SELECTION_PROMPT, QUERY_PROMPT
+from config import MODEL_NAME, DATASET_DB
 
 # Load environment variables
 load_dotenv()
@@ -245,7 +246,7 @@ def generate_response(query, columns_with_description_str, required_columns, pro
 
     # Call the OpenAI API
     response = client.chat.completions.create(
-        model="gpt-4o",
+        model=MODEL_NAME,
         messages=[{"role": "user", "content": rendered_prompt}],
         response_format={"type": "json_object"}
     )
@@ -266,7 +267,7 @@ def call_weave(query, sort_by=None):
     """
     try:
         # Initialize the Weave client
-        client_db = weave.init("c-metrics/hallucination")
+        client_db = weave.init(DATASET_DB)
         
         # Execute the query
         calls = client_db.get_calls(
