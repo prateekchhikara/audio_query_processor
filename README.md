@@ -41,6 +41,21 @@ pip install -r requirements.txt
 2. **Speak your query using the recording controls**:
    <img src="images/image1.png" alt="Audio Query Processor Interface" style="border: 1px solid #ddd;"/>
 
+   <details>
+   <summary>Sample queries you can try (click to expand)</summary>
+   
+   - models which has latency less than 100ms
+   - models which has accuracy greater than 90%
+   - models which has F1 score greater than 0.95
+   - models with precision above 0.85 and recall greater than 0.8
+   - models trained for more than 3 epochs with learning rate less than 0.001
+   - models where the model name contains 'gpt'
+   - models with generation time less than 200ms and accuracy above 0.85
+   - models with total tokens mean less than 500
+   - models where the warmup ratio is greater than 0.1
+   - models with true hallucination fraction less than 0.3
+   </details>
+
 3. **Review your transcribed text and the generated database query**:
    <img src="images/image2.png" alt="Audio Query Processor Interface" style="border: 1px solid #ddd;"/>
 
