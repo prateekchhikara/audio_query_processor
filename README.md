@@ -50,6 +50,16 @@ pip install -r requirements.txt
 5. **Track performance metrics and evaluation results in Weights & Biases**:
    <img src="images/image4.png" alt="Audio Query Processor Interface" width="50%"/>
 
+## Testing the Pipeline
+
+You can test the query processing pipeline using the evaluation script:
+
+```bash
+python evals.py
+```
+
+This script evaluates the system on 3 predefined test queries with ground truth filters. The evaluation results are logged to Weights & Biases, allowing you to track the accuracy of the query generation process and identify potential areas for improvement.
+
 ## Project Structure
 
 ```
