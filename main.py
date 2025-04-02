@@ -116,7 +116,7 @@ def display_recording_controls():
                 st.session_state.required_columns = None
                 st.session_state.final_query = None
                 st.session_state.stream = start_recording()
-                st.experimental_rerun()
+                st.rerun()
         
         # Stop recording button
         with col2:
@@ -125,7 +125,7 @@ def display_recording_controls():
                 if st.session_state.stream:
                     st.session_state.audio_file = stop_recording(st.session_state.stream)
                     st.session_state.stream = None
-                st.experimental_rerun()
+                st.rerun()
 
 def display_recording_progress():
     """Display a progress bar during recording."""
@@ -226,7 +226,7 @@ def display_results():
     st.markdown("---")
     if st.button("🔄 Start Over", type="primary"):
         reset_session_state()
-        st.experimental_rerun()
+        st.rerun()
 
 def reset_session_state():
     """Reset all session state variables to their default values."""

@@ -7,7 +7,7 @@ including audio recording and processing, API interactions, and database queries
 Author: Prateek Chhikara
 """
 
-import whisper
+# import whisper
 import wave
 import sounddevice as sd
 import numpy as np
@@ -68,7 +68,7 @@ def render_prompt(query, columns_with_description, fetched_columns, prompt_templ
 @weave.op()
 def audio2text(audio_file):
     """
-    Transcribe an audio file to text using the Whisper model.
+    Transcribe an audio file to text using OpenAI's Whisper API.
     
     Args:
         audio_file (str): Path to the audio file to transcribe
@@ -76,9 +76,13 @@ def audio2text(audio_file):
     Returns:
         str: The transcribed text
     """
-    model = whisper.load_model("base")
-    result = model.transcribe(audio_file)
-    return result["text"]
+    with open(audio_file, "rb") as audio:
+        transcript = client.audio.transcriptions.create(
+            model="whisper-1",
+            file=audio,
+            response_format="text"
+        )
+    return transcript
 
 def audio_callback(indata, frames, time, status):
     """
